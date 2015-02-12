@@ -1,0 +1,42 @@
+# depslib dependency file v1.0
+1423634789 source:/home/ninetripod/Documents/bone/bone.cpp
+	"bone.h"
+
+1423634714 /home/ninetripod/Documents/bone/bone.h
+	"TYPEDEF.H"
+
+1423658555 /home/ninetripod/Documents/bone/TYPEDEF.H
+	<eigen3/Eigen/Dense>
+	<vector>
+	<iostream>
+	<string>
+	"bone.h"
+	"link.h"
+
+1423661106 source:/home/ninetripod/Documents/bone/main.cpp
+	<iostream>
+	"TYPEDEF.H"
+	"bone.h"
+	"link.h"
+	"pendulum.h"
+
+1423634877 /home/ninetripod/Documents/bone/link.h
+	"TYPEDEF.H"
+
+1423661020 source:/home/ninetripod/Documents/bone/link.cpp
+	"link.h"
+
+1423658730 source:/home/ninetripod/Documents/bone/basicmodel.cpp
+	"basicmodel.h"
+
+1423637775 /home/ninetripod/Documents/bone/basicmodel.h
+	"TYPEDEF.H"
+	<vector>
+	<map>
+
+1423640974 source:/home/ninetripod/Documents/bone/pendulum.cpp
+	"pendulum.h"
+
+1423632452 /home/ninetripod/Documents/bone/pendulum.h
+	"basicmodel.h"
+
