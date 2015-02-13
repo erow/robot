@@ -6,8 +6,10 @@
 #include <iostream>
 #include <string>
 
+
 #include "bone.h"
 #include "link.h"
+
 template <typename T>
 class Tree{
 public:

@@ -1,43 +1,20 @@
 #include <iostream>
+#include <QtGui/QApplication>
+#include <QtGui>
+#include "mainwindow.h"
 #include "TYPEDEF.H"
 #include "bone.h"
 #include "link.h"
 #include "pendulum.h"
 using namespace std;
-
-int main()
+class QApplication;
+int main(int argc, char *argv[])
 {
-    Pendulum robot;
+    QApplication a( argc, argv);
+    MainWindow w;
 
-    robot.changeAngle(0,M_PI/6);
-    //robot.changeAngle(1,M_PI/6);
-    Pendulum::m_links[0]->value->A->print();
-    Pendulum::m_links[0]->value->B->print();
-    Pendulum::m_links[1]->value->B->print();
-
-    cout<<"ROTE--------------\n";
-    robot.changeRote(0,M_PI/3);
-    Pendulum::m_links[0]->value->A->print();
-    Pendulum::m_links[0]->value->B->print();
-    Pendulum::m_links[1]->value->B->print();
-    cout<<"transfor:A*T=B\n";
-    Matrix3d A,B,T;
-    Vector3d a;
-    A=Pendulum::m_links[0]->value->A->gesture;
-    B=Pendulum::m_links[1]->value->B->gesture;
-    //Vector3d x = A.colPivHouseholderQr().solve(b);
-    // robot.searchTree.print(1);
-    T=B*A.adjoint();
-    cout<<T*A<<endl;
-    a<<0,0,10;
-    cout<<"(a*T):\n"<<T.adjoint()*a<<endl;
-
-    robot.refer_gesture=B;
-    robot.refer_pos<<0,0,10;
-
-    robot.getRefer_pos(a,1,1);
-    cout<<"a********\n"<<a<<endl;
-    return 1;
+    w.show();
+    return  a.exec();
 }
 
 /*

@@ -18,8 +18,8 @@ bool BasicModel::changeRote(int sign, double det){
 void BasicModel::getCentroid(Vector3d &re){
 
 }
-void BasicModel::getRefer_pos(Vector3d &re, int sign, int head){
-    Matrix3d p0,t;
+Vector3d viewPort(const Vector3d& refer_pos,const Matrix3d& refer_gesture, int sign){
+  /*  Matrix3d p0,t;
     p0=bones[0]->gesture;
     Vector3d v0=Vector3d::Zero(),v,tv;
     v=v0;
@@ -30,7 +30,28 @@ void BasicModel::getRefer_pos(Vector3d &re, int sign, int head){
     tv=refer_pos-v0;
     t=refer_gesture*p0.adjoint();
     v-=tv;
-    re=t.adjoint()*v;
+    return t.adjoint()*v;*/
+
+}
+void BasicModel::getRefer_pos(Vector3d &re, int sign, int head){
+        Matrix3d p0,t;
+       p0=bones[0]->gesture;
+       Vector3d v0=Vector3d::Zero(),v,tv;
+       v=v0;
+       bones[0]->getCentroid(v0);
+       m_links[sign]->value->getCentroid(v);
+       v0/=bones[0]->getWeight();
+       v/=m_links[sign]->value->getWeight();
+       tv=refer_pos-v0;
+       t=refer_gesture*p0.adjoint();
+       v-=tv;
+       re=t.adjoint()*v;
+
+}
+void BasicModel::getPos(int&x,int&y,int sign){
+    Vector3d p;
+    getRefer_pos(p,sign,1);
+    x=p[0];y=p[2];
 
 }
  std::map<int,ModelTree*> BasicModel::m_links;

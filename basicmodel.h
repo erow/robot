@@ -18,7 +18,7 @@ class BasicModel
 {
 protected:
     std::vector<Bone*> bones;
-    std::vector<Link*> links;
+   // std::vector<Link*> links;
     double weight;
 public:
     static  std::map<int,ModelTree*> m_links;
@@ -29,10 +29,12 @@ public:
 
 public:
     BasicModel();
-    bool changeAngle(int sign,double det);
-    bool changeRote(int SIGN,double det);
+    static bool changeAngle(int sign,double det);
+    static bool changeRote(int SIGN,double det);
     void getCentroid(Vector3d& re);
     void getRefer_pos(Vector3d& re,int sign,int head);
+    void getRefer_pos_link(Vector3d &re, int sign, int head);
+    void getPos(int&x,int&y,int sign);
     EIGEN_MAKE_ALIGNED_OPERATOR_NEW
 
 };
