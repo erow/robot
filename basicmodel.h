@@ -27,6 +27,7 @@ public:
     Matrix3d refer_gesture;
     Vector3d refer_pos;
     const Bone* getBone(int i){return bones[i];}
+    const Link* getLink(int i){return m_links[i]->value;}
 public:
     BasicModel();
     static bool changeAngle(int sign,double det);

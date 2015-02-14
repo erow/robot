@@ -14,9 +14,9 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(timer, SIGNAL(timeout()), this, SLOT(step()));
     cur_link=0;
     robot.init(this);
-    robot.refer_gesture<<1,0,0 , 0,1,0 ,0,0,1;
-    robot.refer_gesture=AngleAxisd(M_PI/4, Vector3d(0,0,1))*robot.refer_gesture;
-    robot.refer_pos<<10,-10,0;
+    refer_gesture<<1,0,0 , 0,1,0 ,0,0,1;
+    refer_gesture=AngleAxisd(M_PI/4, Vector3d(0,0,1));
+    refer_pos<<200,-200,-20;
 
 }
 MainWindow::~MainWindow()
@@ -52,16 +52,17 @@ void MainWindow::paintEvent ( QPaintEvent * e){
     QMainWindow::paintEvent(e);
 
     QPainter pen(this);
-    pen.drawEllipse(200,200,30,30);
+    pen.drawEllipse(Screan_x,Screan_y,10,10);
    // pen.drawEllipse(target);
     //draw bones
-    QPoint po(200,200);
+    QPoint po(Screan_x,Screan_y);
     //p1=po;
     for(int i=1;i<10;i++){
-        double x,y,z;
-        robot.getBone(i)->getHeadPos(x,y,z);
+        int x,y,z;
+    // robot.getBone(i)->getHeadPos(x,y,z);
+        viewPort(robot.getBone(i)->head,x,z);
         QPoint p1(x,-z);
-        robot.getBone(i)->getTailPos(x,y,z);
+        viewPort(robot.getBone(i)->tail,x,z);
         QPoint pt(x,-z);
         pen.drawLine(po+p1,po+pt);
 

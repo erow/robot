@@ -21,7 +21,7 @@ public:
 public:
     friend class Link;
     void cal();
-    Bone(double len=100,double w=100);
+    Bone(double len=10,double w=100);
     void setOrigin();
     EIGEN_MAKE_ALIGNED_OPERATOR_NEW
     void setSign(int s){sign=s;}

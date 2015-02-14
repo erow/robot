@@ -1,5 +1,6 @@
 #include "qmlink.h"
 #include "basicmodel.h"
+#include "mainwindow.h"
 #include <QtGui>
 QMLink *cur_link=0;
 void PendulumView::init(QWidget* te){
@@ -56,6 +57,7 @@ bool QMLink::hitButton ( const QPoint & pos ){
 }
 void QMLink::focusInEvent ( QFocusEvent * e ){
    cur_link=this;
+
 }
 QPainterPath QMLink::shape()
   {
@@ -74,10 +76,11 @@ void QMLink::paintEvent ( QPaintEvent * e){
    // pen.drawEllipse(target);
 }
 void QMLink::cal(){
-    double x,y,z;
-    PendulumView::m_links[sign]->value->B->getHeadPos(x,y,z);
+    int x,y,z;
+   // PendulumView::m_links[sign]->value->B->getHeadPos(x,y,z);
     //robot->getPos(x,y,sign);
-    setPos(200+x,200-z);
+    viewPort(PendulumView::m_links[sign]->value->B->head,x,z);
+    setPos(Screan_x+x,Screan_y-z);
     double q=PendulumView::m_links[sign]->value->B->head(0);
     qDebug()<<"sign:"<<sign;//<<",x:"<<x<<",y:"<<y<<"\n"<<q<<"\n";
 }

@@ -16,7 +16,25 @@ int main(int argc, char *argv[])
     w.show();
     return  a.exec();
 }
+Matrix3d refer_gesture;
+Vector3d refer_pos;
+void viewPort(const Vector3d& v_t,int &x,int&y){
+   Matrix3d p0,t;
+   p0<<1,0,0, 0,1,0, 0,0,1;
+   Vector3d v,tv;
 
+   t=refer_gesture*p0.adjoint();
+   v=v_t- refer_pos;
+   tv=t.adjoint()*v;
+   if(tv(1)<=0)
+   {
+    x=y=999999;
+   }
+   else{
+       x=tv(0)/tv(1)*Screan_size;
+       y=tv(2)/tv(1)*Screan_size;
+   }
+}
 /*
 Matrix3d A;A<<1,0,0
                  ,0,1,0
