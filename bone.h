@@ -27,6 +27,8 @@ public:
     void setSign(int s){sign=s;}
     double getWeight(){return weight;}
     bool getCentroid(Vector3d& re);
+    void getHeadPos(double&x,double&y,double&z) const;
+    void getTailPos(double&x,double&y,double&z) const;
     void print(){
         cout<<"head:"<<head.transpose()<<endl;
         cout<<"tail:"<<tail.transpose()<<endl;

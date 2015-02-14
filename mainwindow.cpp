@@ -15,7 +15,8 @@ MainWindow::MainWindow(QWidget *parent) :
     cur_link=0;
     robot.init(this);
     robot.refer_gesture<<1,0,0 , 0,1,0 ,0,0,1;
-    robot.refer_pos<<0,-10,0;
+    robot.refer_gesture=AngleAxisd(M_PI/4, Vector3d(0,0,1))*robot.refer_gesture;
+    robot.refer_pos<<10,-10,0;
 
 }
 MainWindow::~MainWindow()
@@ -38,10 +39,32 @@ void MainWindow::valuechange(){
     angle=ui->Edit_angle->text();
     rote=ui->Edit_rote->text();
     cur_link->changeRote((rote.toDouble()));
+    cur_link->changeAngle(angle.toDouble());
 }
 
 
 void MainWindow::on_button_rote_clicked()
 {
+    valuechange();
+    update();
+}
+void MainWindow::paintEvent ( QPaintEvent * e){
+    QMainWindow::paintEvent(e);
 
+    QPainter pen(this);
+    pen.drawEllipse(200,200,30,30);
+   // pen.drawEllipse(target);
+    //draw bones
+    QPoint po(200,200);
+    //p1=po;
+    for(int i=1;i<10;i++){
+        double x,y,z;
+        robot.getBone(i)->getHeadPos(x,y,z);
+        QPoint p1(x,-z);
+        robot.getBone(i)->getTailPos(x,y,z);
+        QPoint pt(x,-z);
+        pen.drawLine(po+p1,po+pt);
+
+        qDebug()<<"i:"<<i<<",x:"<<x<<",y:"<<y<<",z:"<<z<<"\n";
+    }
 }

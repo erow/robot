@@ -18,6 +18,28 @@ bool BasicModel::changeRote(int sign, double det){
 void BasicModel::getCentroid(Vector3d &re){
 
 }
+void BasicModel::getBone_pos(double& x,double& y,double& z,int sign){
+    Vector3d p;
+   Matrix3d p0,t;
+   p0=bones[0]->gesture;
+   Vector3d v0=Vector3d::Zero(),v,tv;
+   v=v0;
+   bones[0]->getCentroid(v0);
+   if(1){
+       v=bones[sign]->tail;
+   }
+   else{
+
+   }
+
+   v0/=bones[0]->getWeight();
+   tv=refer_pos-v0;
+   t=refer_gesture*p0.adjoint();
+   v-=tv;
+   p=t.adjoint()*v;
+   x=p[0];y=p[1];z=p[2];
+}
+
 Vector3d viewPort(const Vector3d& refer_pos,const Matrix3d& refer_gesture, int sign){
   /*  Matrix3d p0,t;
     p0=bones[0]->gesture;

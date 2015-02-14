@@ -28,16 +28,15 @@ public:
     bool	hitButton ( const QPoint & pos ) ;
     void  focusInEvent ( QFocusEvent * e );
     void 	paintEvent ( QPaintEvent * );
-    void cal(){
-        int x,y;
-        robot->getPos(x,y,sign);
-        setPos(100+x,100+y);
-    }
+    void cal();
 
     void setPos(int x,int y){
         setGeometry(x,y,16,16);
     }
     void setAngle(double a){
+        PendulumView::changeAngle(sign,a);
+    }
+    void changeAngle(double a){
         PendulumView::changeAngle(sign,a);
     }
     void changeRote(double a){

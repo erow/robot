@@ -26,11 +26,12 @@ public:
 
     Matrix3d refer_gesture;
     Vector3d refer_pos;
-
+    const Bone* getBone(int i){return bones[i];}
 public:
     BasicModel();
     static bool changeAngle(int sign,double det);
     static bool changeRote(int SIGN,double det);
+    void getBone_pos(double& x,double& y,double& z,int sign);
     void getCentroid(Vector3d& re);
     void getRefer_pos(Vector3d& re,int sign,int head);
     void getRefer_pos_link(Vector3d &re, int sign, int head);

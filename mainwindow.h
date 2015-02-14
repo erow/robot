@@ -21,7 +21,7 @@ private slots:
     void step();
     void valuechange();
     void on_button_rote_clicked();
-
+    void paintEvent ( QPaintEvent * e);
 private:
     PendulumView robot;
     Ui::MainWindow *ui;
