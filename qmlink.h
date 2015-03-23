@@ -39,9 +39,7 @@ public:
     void changeAngle(double a){
         PendulumView::changeAngle(sign,a);
     }
-    void changeRote(double a){
-        PendulumView::changeRote(sign,a);
-    }
+
 
     QPainterPath shape();
     QRectF boundingRect() const

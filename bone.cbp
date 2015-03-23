@@ -37,14 +37,17 @@
 		<Unit filename="basicmodel.h" />
 		<Unit filename="bone.cpp" />
 		<Unit filename="bone.h" />
+		<Unit filename="consolemain.cpp" />
+		<Unit filename="include/motor.h" />
+		<Unit filename="include/motor_interface.h" />
 		<Unit filename="link.cpp" />
 		<Unit filename="link.h" />
-		<Unit filename="main.cpp" />
 		<Unit filename="pendulum.cpp" />
 		<Unit filename="pendulum.h" />
 		<Extensions>
 			<code_completion />
 			<debugger />
+			<envvars />
 		</Extensions>
 	</Project>
 </CodeBlocks_project_file>

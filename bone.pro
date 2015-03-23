@@ -9,7 +9,8 @@ SOURCES += main.cpp \
     basicmodel.cpp \
     pendulum.cpp \
     mainwindow.cpp \
-    qmlink.cpp
+    qmlink.cpp \
+    device_data.cpp
 
 HEADERS += \
     bone.h \
@@ -18,7 +19,8 @@ HEADERS += \
     basicmodel.h \
     pendulum.h \
     mainwindow.h \
-    qmlink.h
+    qmlink.h \
+    device_data.h
 
 FORMS += \
     mainwindow.ui

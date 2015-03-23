@@ -7,7 +7,7 @@
 class ModelTree:public Tree<Link*>{
 public:
     ModelTree(){;}
-
+   // void cal_link(Tree* t);
     void cal();
     bool getCentroid(Vector3d& re);
     ModelTree* connect(Bone *b);
@@ -20,6 +20,8 @@ protected:
     std::vector<Bone*> bones;
    // std::vector<Link*> links;
     double weight;
+
+
 public:
     static  std::map<int,ModelTree*> m_links;
     ModelTree searchTree;
@@ -31,7 +33,7 @@ public:
 public:
     BasicModel();
     static bool changeAngle(int sign,double det);
-    static bool changeRote(int SIGN,double det);
+
     void getBone_pos(double& x,double& y,double& z,int sign);
     void getCentroid(Vector3d& re);
     void getRefer_pos(Vector3d& re,int sign,int head);

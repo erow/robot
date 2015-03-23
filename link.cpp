@@ -5,10 +5,12 @@ Link::Link(Bone *a,Bone* b,double angle,double w,double pow)
     max_angle=angle;
     weight=w;
     power=pow;
-    type=0;sign=0;
+    type=Tangle;
+    sign=0;
     A=a;B=b;
 
-    rote=0;
+    rotationVector=Vector3d(1,0,0);
+    translate=A->gesture;
     this->angle=0;
 
     b->gesture=a->gesture;
@@ -16,34 +18,26 @@ Link::Link(Bone *a,Bone* b,double angle,double w,double pow)
     b->cal();
 }
 bool Link::setAngle(double a){
-    Matrix3d T;
-    T=
-            AngleAxisd(a-angle, A->gesture.col(1))
-            * AngleAxisd(0, A->gesture.col(2));
-    B->gesture=T*B->gesture;
-    B->cal();
+
     angle=a;
+    cal();
     return 1;
 }
-bool Link::setRote(double a){
+void Link::addAngle(double a){
+    translate=AngleAxisd(a, rotationVector)*translate;
+    cal();
+}
 
-    Matrix3d T;
+bool Link::setRotationVector(double a,double b,double c){
 
-    T=      AngleAxisd(0, A->gesture.col(1))
-            * AngleAxisd(a-rote, A->gesture.col(2));
-    B->gesture=T*B->gesture;
-
-    B->cal();
-    rote=a;
+    rotationVector=Vector3d(a,b,c);
+    cal();
     return 1;
 }
+
 void Link::cal(){
-    Matrix3d T;
-    T=AngleAxisd(rote, A->gesture.col(2))*
-      AngleAxisd(angle, A->gesture.col(1))
-            ;
 
-     B->gesture=T*A->gesture;
+     B->gesture=translate*(AngleAxisd(angle, A->gesture*rotationVector)*A->gesture);
      B->head=A->tail;
      B->cal();
 }

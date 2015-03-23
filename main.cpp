@@ -10,9 +10,11 @@ using namespace std;
 class QApplication;
 int main(int argc, char *argv[])
 {
+    cout<<"start\n";
     QApplication a( argc, argv);
     MainWindow w;
 
+   // QPushButton w;
     w.show();
     return  a.exec();
 }
@@ -26,13 +28,14 @@ void viewPort(const Vector3d& v_t,int &x,int&y){
    t=refer_gesture*p0.adjoint();
    v=v_t- refer_pos;
    tv=t.adjoint()*v;
-   if(tv(1)<=0)
+   if(tv(0)<=0)
    {
     x=y=999999;
    }
+
    else{
-       x=tv(0)/tv(1)*Screan_size;
-       y=tv(2)/tv(1)*Screan_size;
+       x=atan2(tv(1),tv(0))*Screan_size;
+       y=atan2(tv(2),tv(0))*Screan_size;
    }
 }
 /*

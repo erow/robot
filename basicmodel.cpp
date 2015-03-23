@@ -10,11 +10,7 @@ bool BasicModel::changeAngle(int sign, double det){
      m_links[sign]->cal();
      return true;
 }
-bool BasicModel::changeRote(int sign, double det){
-    m_links[sign]->value->setRote(det);
-    m_links[sign]->cal();
-    return true;
-}
+
 void BasicModel::getCentroid(Vector3d &re){
 
 }
@@ -77,29 +73,36 @@ void BasicModel::getPos(int&x,int&y,int sign){
 
 }
  std::map<int,ModelTree*> BasicModel::m_links;
+template<typename T>
+void cal_link(Tree<T>* t){
+    t->value->cal();
+}
 void ModelTree::cal(){
-    value->cal();
+    /*value->cal();
     for(unsigned int i=0;i<children.size();i++){
     // children[i]->value->cal();
         ((ModelTree*)children[i])->cal();
-    }
-
+    }*/
+    Tree::call(cal_link);
 }
 ModelTree* ModelTree::connect(Bone *b){
-    ModelTree* t=(ModelTree *)new Tree(new Link(value->B,b));
-   children.push_back(t);
-   static int num=0;
-   t->value->setSign(num);
-   BasicModel::m_links[num]=t;
-   num++;
-   return t;
+   Tree* tnode=new Tree<Link*>(new Link(value->B,b));
+   //children.push_back(t);
+   static int mnum=0;
+   tnode->value->setSign(mnum);
+   BasicModel::m_links[mnum]=(ModelTree*)tnode;
+   mnum++;
+   Tree::addChild(tnode);
+   std::cout<<"addchild done!\n";
+
+   return (ModelTree*)tnode;
 }
 bool ModelTree::getCentroid(Vector3d &re){
-
+/*
     for(unsigned int i=0;i<children.size();i++){
         value->B->getCentroid(re);
         value->getCentroid(re);
        ((ModelTree*)children[i])->getCentroid(re);
-    }
+    }*/
     return true;
 }
